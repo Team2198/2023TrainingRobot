@@ -3,13 +3,22 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Elevator extends SubsystemBase {
   /** Creates a new Elevator. */
-  public Elevator() {}
+  private final WPI_TalonFX motor;
 
+  public Elevator() {
+    motor = new WPI_TalonFX(0)
+  }
+
+  public void elevation(double leftHeading) {
+    motor.set(leftHeading);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
