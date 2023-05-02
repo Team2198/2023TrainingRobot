@@ -17,6 +17,7 @@ public class ShooterCommands extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     shooterSystem = shooter;
     addRequirements(shooterSystem);
+    //Takes in only the shoot subsystem
   }
 
   // Called when the command is initially scheduled.
@@ -27,6 +28,7 @@ public class ShooterCommands extends CommandBase {
   @Override
   public void execute() {
     shooterSystem.Shooting();
+    //Activates the motor 
   }
 
   // Called once the command ends or is interrupted.

@@ -28,7 +28,8 @@ public class RobotContainer {
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Elevator elevator = new Elevator(); 
   private final Shooter shooter = new Shooter();
-  private final CommandXboxController controller2 = new CommandXboxController(1); 
+  private final CommandXboxController controller2 = new CommandXboxController(1);
+  //Declaring the elevator and shooter subsystem along with the xbox controller 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -55,6 +56,8 @@ public class RobotContainer {
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     elevator.setDefaultCommand(new ElevatorCommands(elevator, ()->controller2.getLeftY()));
     controller2.rightTrigger().onTrue(new ShooterCommands(shooter));
+
+    //Binding the controls
     
 
   }

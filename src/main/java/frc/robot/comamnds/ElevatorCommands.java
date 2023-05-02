@@ -19,6 +19,7 @@ public class ElevatorCommands extends CommandBase {
     elevatorSystem = elevator;
     elevation = movement.getAsDouble(); 
     addRequirements(elevatorSystem);
+    //The command requires the subsystem and the input from the joystick
   }
 
   // Called when the command is initially scheduled.
@@ -29,6 +30,7 @@ public class ElevatorCommands extends CommandBase {
   @Override
   public void execute() {
     elevatorSystem.elevation(elevation);
+    //activates the elevation method to elevat the elevator 
   }
 
   // Called once the command ends or is interrupted.

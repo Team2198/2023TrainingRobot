@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Elevator extends SubsystemBase {
   /** Creates a new Elevator. */
   private final WPI_TalonFX motor;
+  
 
   public Elevator() {
     motor = new WPI_TalonFX(0)
@@ -17,6 +18,7 @@ public class Elevator extends SubsystemBase {
 
   public void elevation(double leftHeading) {
     motor.set(leftHeading);
+    //Takes in the doublesupplier to determine the direction the motor is in 
   }
   
   @Override
