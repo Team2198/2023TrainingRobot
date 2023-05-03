@@ -9,10 +9,13 @@ import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
   Intake intake;
+  boolean trigger;
   /** Creates a new IntakeCommand. */
-  public IntakeCommand(Intake intakeInput) {
+  public IntakeCommand(Intake intakeInput,boolean triggerInput) {
     intake = intakeInput;
     addRequirements(intake);
+    trigger = triggerInput;
+    //addRequirements(trigger);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -23,7 +26,12 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    intake.lower();
+    if(trigger){
+      intake.lower();
+    }
+    else{
+      intake.retract();
+    }
   }
 
   // Called once the command ends or is interrupted.
