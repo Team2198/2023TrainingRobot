@@ -5,7 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-
+import frc.robot.comamnds.IntakeCommand;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -24,6 +25,8 @@ import frc.robot.comamnds.ShooterCommands;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  Intake intake;
+  boolean trigger;
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Elevator elevator = new Elevator(); 
@@ -33,6 +36,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    intake = new Intake();
     // Configure the trigger bindings
     configureBindings();
   }
@@ -54,11 +58,11 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
     elevator.setDefaultCommand(new ElevatorCommands(elevator, ()->controller2.getLeftY()));
     controller2.rightTrigger().onTrue(new ShooterCommands(shooter));
-
-    //Binding the controls
-    
+    m_driverController.a().onTrue(new IntakeCommand(intake,trigger));
+    m_driverController.a().onTrue(new IntakeCommand(intake,trigger));
 
   }
 
