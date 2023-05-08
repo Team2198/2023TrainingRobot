@@ -18,12 +18,15 @@ public class Shooter extends SubsystemBase {
     leftmotor = new CANSparkMax(0, null);
     rightmotor = new CANSparkMax(0, null);
     leftmotor.setInverted(true);
+    //Invert left motor because it is facing the opposite direction of the right motor
   }
 
 
   public void Shooting(){
     leftmotor.set(0.8);
-    leftmotor.set(0.8);
+    rightmotor.set(0.8);
+    //Move motor when the method is issued
+
   }
 
   @Override
