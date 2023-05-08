@@ -3,13 +3,23 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.comamnds;
+import frc.robot.subsystems.Elevator;
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ElevatorCommands extends CommandBase {
   /** Creates a new ElevatorCommands. */
-  public ElevatorCommands() {
+
+  Elevator elevatorSystem;
+  double elevation;
+
+  public ElevatorCommands(Elevator elevator, DoubleSupplier movement) {
     // Use addRequirements() here to declare subsystem dependencies.
+    elevatorSystem = elevator;
+    elevation = movement.getAsDouble(); 
+    addRequirements(elevatorSystem);
+    //The command requires the subsystem and the input from the joystick
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +28,10 @@ public class ElevatorCommands extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    elevatorSystem.elevation(elevation);
+    //activates the elevation method to elevat the elevator 
+  }
 
   // Called once the command ends or is interrupted.
   @Override
