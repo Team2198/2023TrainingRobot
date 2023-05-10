@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
 public class IntakeCommand extends CommandBase {
-  Intake intake;
+  Intake intakes;
   boolean trigger;
   /** Creates a new IntakeCommand. */
   public IntakeCommand(Intake intakeInput,boolean triggerInput) {
-    intake = intakeInput;
-    addRequirements(intake);
+    intakes = intakeInput;
+    addRequirements(intakes);
     trigger = triggerInput;
     //addRequirements(trigger);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -27,10 +27,10 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void execute() {
     if(trigger){
-      intake.lower();
+      intakes.lower();
     }
     else{
-      intake.retract();
+      intakes.retract();
     }
   }
 

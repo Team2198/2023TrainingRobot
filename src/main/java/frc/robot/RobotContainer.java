@@ -5,11 +5,17 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.comamnds.IntakeCommand;
-import frc.robot.subsystems.Intake;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
+
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Shooter;
+import frc.robot.comamnds.ElevatorCommands;
+import frc.robot.comamnds.ShooterCommands;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,18 +24,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  Intake intake;
-  boolean trigger;
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final Elevator elevator = new Elevator(); 
+  private final Shooter shooter = new Shooter();
+  private final CommandXboxController controller2 = new CommandXboxController(1);
+  //Declaring the elevator and shooter subsystem along with the xbox controller 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    intake = new Intake();
     // Configure the trigger bindings
     configureBindings();
   }
@@ -51,8 +54,16 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
     m_driverController.rightBumper().onTrue(new IntakeCommand(intake,true));
     m_driverController.leftBumper().onTrue(new IntakeCommand(intake,false));
+    elevator.setDefaultCommand(new ElevatorCommands(elevator, ()->controller2.getLeftY()));
+    controller2.rightTrigger().onTrue(new ShooterCommands(shooter, true));
+    controller2.rightTrigger().onFalse(new ShooterCommands(shooter, false));
+
+    //Binding the controls
+    
+
   }
 
   /**
