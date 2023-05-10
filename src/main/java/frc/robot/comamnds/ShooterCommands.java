@@ -13,9 +13,10 @@ public class ShooterCommands extends CommandBase {
   Shooter shooterSystem; 
   boolean shootingBall;
 
-  public ShooterCommands(Shooter shooter) {
+  public ShooterCommands(Shooter shooter, boolean shooting) {
     // Use addRequirements() here to declare subsystem dependencies.
     shooterSystem = shooter;
+    shootingBall = shooting;
     addRequirements(shooterSystem);
   }
 
@@ -26,8 +27,12 @@ public class ShooterCommands extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooterSystem.Shooting();
-
+    if (shootingBall){
+      shooterSystem.Shooting();
+    }
+    else{
+      shooterSystem.TurnOff();
+    }
   }
 
   // Called once the command ends or is interrupted.

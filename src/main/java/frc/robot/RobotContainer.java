@@ -55,7 +55,8 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     elevator.setDefaultCommand(new ElevatorCommands(elevator, ()->controller2.getLeftY()));
-    controller2.rightTrigger().onTrue(new ShooterCommands(shooter));
+    controller2.rightTrigger().onTrue(new ShooterCommands(shooter, true));
+    controller2.rightTrigger().onFalse(new ShooterCommands(shooter, false));
 
     //Binding the controls
     
