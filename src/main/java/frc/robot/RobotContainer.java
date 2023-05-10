@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-
+import frc.robot.comamnds.IntakeCommand;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 import frc.robot.comamnds.ElevatorCommands;
@@ -28,6 +29,8 @@ public class RobotContainer {
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Elevator elevator = new Elevator(); 
   private final Shooter shooter = new Shooter();
+  private final Intake intake = new Intake();
+  private final CommandXboxController controller1 = new CommandXboxController(0);
   private final CommandXboxController controller2 = new CommandXboxController(1);
   //Declaring the elevator and shooter subsystem along with the xbox controller 
 
@@ -55,11 +58,10 @@ public class RobotContainer {
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.rightBumper().onTrue(new IntakeCommand(intake,true));
-    m_driverController.leftBumper().onTrue(new IntakeCommand(intake,false));
+    controller1.rightBumper().onTrue(new IntakeCommand(intake,true));
+    controller1.leftBumper().onTrue(new IntakeCommand(intake,false));
     elevator.setDefaultCommand(new ElevatorCommands(elevator, ()->controller2.getLeftY()));
-    controller2.rightTrigger().onTrue(new ShooterCommands(shooter, true));
-    controller2.rightTrigger().onFalse(new ShooterCommands(shooter, false));
+    controller2.rightTrigger().whileTrue(new ShooterCommands(shooter));
 
     //Binding the controls
     
