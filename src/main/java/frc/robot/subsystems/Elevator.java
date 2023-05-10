@@ -17,6 +17,9 @@ public class Elevator extends SubsystemBase {
   }
 
   public void elevation(double leftHeading) {
+    if (leftHeading < .15 && leftHeading > -.15){
+      leftHeading = 0;
+    }
     motor.set(leftHeading);
     //Takes in the doublesupplier to determine the direction the motor is in 
   }
